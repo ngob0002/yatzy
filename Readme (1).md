@@ -32,7 +32,7 @@ Yatzy is a popular dice game with a combination of luck and strategy. Players ro
 - When the dice roll, you can create a simple animation to mimic the rolling motion. This can add to the excitement and realism of the game.
 
 ### Game Mock-ups
-- ![game board](game_board.png)
+- ![game board](game board.png)
   
 - ![scordcard](Scorecard.png)
 
