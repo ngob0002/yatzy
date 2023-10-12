@@ -33,6 +33,7 @@ Yatzy is a popular dice game with a combination of luck and strategy. Players ro
 
 ### Game Mock-ups
 - ![game board](game_board.png)
+  
 - ![scordcard](Scorecard.png)
 
 ### Playing Instructions
