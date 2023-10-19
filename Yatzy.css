@@ -1,0 +1,87 @@
+body {
+    font-family: "Celandine", sans-serif;
+    background-color: #FFFFFF;
+    text-align: center;
+}
+
+.heading {
+    color: #FFD699;
+}
+
+.die {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    top: 10px;
+    display: inline-block;
+    margin-right: 10px;
+    background-image: url('dice1.jpg'); 
+    background-size: 600% 100%;
+}
+
+button#roll-button {
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: #FFD699;
+    color: #FFF4E3;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+button#roll-button:hover {
+    background-color: #FFEBCD;
+}
+
+button#roll-button:focus {
+    outline: none;
+}
+
+#total {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.scorecard {
+    inline-size: 300px;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+.scorecard th {
+    background-color: #FFD699;
+}
+
+.scorecard th, .scorecard td {
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: center;
+}
+
+.scorecard tr:nth-child(odd) {
+    background-color: #FFEBCD;
+}
+
+.scorecard tr:nth-child(even) {
+    background-color: #FFF4E3;
+}
+
+
+.scorecard-container {
+    display: flex;
+    justify-content: space-between; /* Adjust this value to control the gap between tables */
+}
+
+.die.selected {
+    border: 2px solid #ff8400c7; /* Change the border style to indicate selection */
+}
+
+/* ... Previous CSS code ... */
+
+@keyframes roll {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg); }
+}

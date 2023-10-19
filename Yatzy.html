@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="Yatzy.css">
+    
+</head>
+<body>
+    <h1 class="heading">Yatzy Game</h1>
+    
+    <div id="dice-container">
+        <div class="die" id="die1"></div>
+        <div class="die" id="die2"></div>
+        <div class="die" id="die3"></div>
+        <div class="die" id="die4"></div>
+        <div class="die" id="die5"></div>
+    </div>
+    <div id="total">Total: 0</div>
+     <button id="roll-button">Roll the Dice</button>
+
+
+     <div class="scorecard-container">
+        <table class="scorecard">
+            <!-- Table content -->
+            <tr>
+                <th></th>
+                <th>Player 1</th>
+            </tr>
+            <tr>
+                <td>Ones</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Twos</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Threes</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Fours</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Fives</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Sixes</td>
+                <td>0</td>
+            </tr>
+        </table>
+        <table class="scorecard">
+            <!-- Table content -->
+            <tr>
+                <th></th>
+                <th>Player 1</th>
+            </tr>
+            <tr>
+                <td>Three of a Kind</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Four of a Kind</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Full House</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Small Straight</td>
+                <td>0</td>
+            </tr>
+        </table>
+        <table class="scorecard">
+            <!-- Table content -->
+            <tr>
+                <th></th>
+                <th>Player 1</th>
+            </tr>
+            <tr>
+                <td>Large Straight</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Yatzy</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Chance</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td><strong>Total Score</strong></td>
+                <td>0</td>
+            </tr>
+        </table>
+    </div>
+       
+    <script src="Yatzy.js"></script>
+    <script src="Dice.js"></script>
+    <script src="YatzyEngine.js"></script>
+    <script src="YatzyGame.js"></script>
+
+   
+   
+</body>
+</html>
