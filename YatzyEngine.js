@@ -80,68 +80,40 @@ class YatzyEngine {
         return score;
     }
     
-     
     calculateCategoryScore(category, diceValues) {
-        // Example scoring logic for the 'Ones' category (add more categories)
-        if (category === 'Ones') {
-            return diceValues.filter(value => value === 1).length;
-        }
-        // Implement scoring logic for other categories
-        if (category === 'Twos') {
-            return diceValues.filter(value => value === 2).length;
-        }
-        if (category === 'Threes') {
-            return diceValues.filter(value => value === 3).length;
-        }
-        if (category === 'Fours') {
-            return diceValues.filter(value => value === 4).length;
-        }
-        if (category === 'Fives') {
-            return diceValues.filter(value => value === 5).length;
-        }
-        if (category === 'Sixes') {
-            return diceValues.filter(value => value === 6).length;
-        }
-        if (this.hasNOfAKind(diceValues, 3)) {
+        if (category === 'ones' || category === 'twos' || category === 'threes' || category === 'fours' || category === 'fives' || category === 'sixes') {
+            return this.calculateCategory(category, diceValues);
+        } else if (category === 'threeOfAKind' && this.isThreeOfAKind(diceValues)) {
             return diceValues.reduce((sum, dice) => sum + dice, 0);
-        }
-        if (this.hasNOfAKind(diceValues, 4)) {
+        } else if (category === 'fourOfAKind' && this.isFourOfAKind(diceValues)) {
             return diceValues.reduce((sum, dice) => sum + dice, 0);
-        }
-        if (this.isFullHouse(diceValues)) {
+        } else if (category === 'fullHouse' && this.isFullHouse(diceValues)) {
             return 25;
-        }
-        if (this.isSmallStraight(diceValues)) {
+        } else if (category === 'smallStraight' && this.isSmallStraight(diceValues)) {
             return 30;
-        }
-        if (this.isLargeStraight(diceValues)) {
+        } else if (category === 'largeStraight' && this.isLargeStraight(diceValues)) {
             return 40;
-        }
-        if (this.hasNOfAKind(diceValues, 5)) {
-            return 50;
-        }
-        if (category === 'Chance') {
-            // Calculate the sum of all dice
+        } else if (category === 'chance') {
             return diceValues.reduce((sum, dice) => sum + dice, 0);
-        }
-         // Bonus
-    const sumOnesToSixes = this.calculateSum(diceValues, 1) + this.calculateSum(diceValues, 2) + this.calculateSum(diceValues, 3) + this.calculateSum(diceValues, 4) + this.calculateSum(diceValues, 5) + this.calculateSum(diceValues, 6);
-    if (category === 'Bonus' && sumOnesToSixes >= 63) {
-        return 35;
-    }
-
-    if (category === 'Total Score') {
-        // Calculate the total score for all categories
-        let totalScore = 0;
-        for (const key in this.scoreTable) {
-            if (this.scoreTable[key] !== null) {
-                totalScore += this.scoreTable[key];
+        } else if (category === 'yatzy' && this.isYatzy(diceValues)) {
+            return 50;
+        } else if (category === 'bonus') {
+            // Calculate the sum of "Ones" through "Sixes"
+            const sumOnesToSixes = this.calculateCategory('ones', diceValues) + this.calculateCategory('twos', diceValues) + this.calculateCategory('threes', diceValues) + this.calculateCategory('fours', diceValues) + this.calculateCategory('fives', diceValues) + this.calculateCategory('sixes', diceValues);
+            return sumOnesToSixes >= 63 ? 35 : 0;
+        } else if (category === 'totalScore') {
+            // Calculate the total score for all categories
+            let totalScore = 0;
+            for (const key in this.scoreTable) {
+                if (this.scoreTable[key] !== null) {
+                    totalScore += this.scoreTable[key];
+                }
             }
+            return totalScore;
         }
-        return totalScore;
-    }
         return null; // Default: category not implemented
     }
+    
     isValidSelection(category, diceValues) {
       switch (category) {
         case "ones":
