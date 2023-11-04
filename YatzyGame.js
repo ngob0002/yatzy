@@ -52,14 +52,16 @@ class YatzyGame {
             // Disable the roll button after three rolls in a round.
             rollButton.disabled = true;
         }
-    }
+        this.selectedDiceToReroll = [];
 
+    }
+    
     toggleSelectedDie(dieIndex) {
         if (this.currentRoll >= 3) {
             console.log('You have used up all your rolls for this turn.');
             return;
         }
-
+    
         // Implement logic to select and hold dice for re-rolling.
         if (this.selectedDiceToReroll.includes(dieIndex)) {
             const index = this.selectedDiceToReroll.indexOf(dieIndex);
@@ -68,20 +70,23 @@ class YatzyGame {
             this.selectedDiceToReroll.push(dieIndex);
         }
     }
+    
 
     rerollSelectedDice() {
         if (this.currentRoll >= 3) {
             console.log('You have used up all your rolls for this turn.');
             return;
         }
-
+    
         // Implement logic to re-roll selected dice.
         for (const dieIndex of this.selectedDiceToReroll) {
             this.rolledDiceValues[dieIndex] = this.getRandomNumber(1, 6);
         }
-
+    
         this.currentRoll++;
+        this.turns++; // Increment the turns at each roll.
     }
+    
 
     updateScore(score) {
         this.totalScore += score;
@@ -122,7 +127,13 @@ class YatzyGame {
 
     endGame() {
         console.log(`Game Over! Your total score is ${this.totalScore}`);
+        const totalScoreElement = document.getElementById('total-score'); 
+        totalScoreElement.innerText = `Total Score: ${this.totalScore}`;
+    
+        // Show a game over message in an alert:
+        alert(`Game Over! Your total score is ${this.totalScore}`);
     }
+    
 
     getRandomNumber(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
