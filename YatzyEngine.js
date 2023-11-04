@@ -1,34 +1,86 @@
-// YatzyEngine.js
 class YatzyEngine {
     constructor() {
-        this.scoreTable = {
-            Ones: null,
-            Twos: null,
-            Threes: null,
-            Fours: null,
-            Fives: null,
-            Sixes: null,
-            ThreeOfAKind: null,
-            FourOfAKind: null,
-            FullHouse: null,
-            SmallStraight: null,
-            LargeStraight: null,
-            Yatzy: null,
-            Chance: null,
-            Bonus: null,
-            TotalScore: null,
-        };
+      this.scoreTable = {
+        ones: null,
+        twos: null,
+        threes: null,
+        fours: null,
+        fives: null,
+        sixes: null,
+        threeOfAKind: null,
+        fourOfAKind: null,
+        fullHouse: null,
+        smallStraight: null,
+        largeStraight: null,
+        chance: null,
+        yatzy: null,
+      };
     }
-
+  
     calculateScore(category, diceValues) {
-        const categoryScore = this.calculateCategoryScore(category, diceValues);
-        if (categoryScore !== null && this.scoreTable[category] === null) {
-            this.scoreTable[category] = categoryScore;
-            return categoryScore;
+        let score = 0;
+    
+        switch (category) {
+            case "ones":
+                score = this.calculateCategoryScore(1, diceValues);
+                break;
+            case "twos":
+                score = this.calculateCategoryScore(2, diceValues);
+                break;
+            case "threes":
+                score = this.calculateCategoryScore(3, diceValues);
+                break;
+            case "fours":
+                score = this.calculateCategoryScore(4, diceValues);
+                break;
+            case "fives":
+                score = this.calculateCategoryScore(5, diceValues);
+                break;
+            case "sixes":
+                score = this.calculateCategoryScore(6, diceValues);
+                break;
+            case "threeOfAKind":
+                if (this.hasNOfAKind(diceValues, 3)) {
+                    score = diceValues.reduce((sum, dice) => sum + dice, 0);
+                }
+                break;
+            case "fourOfAKind":
+                if (this.hasNOfAKind(diceValues, 4)) {
+                    score = diceValues.reduce((sum, dice) => sum + dice, 0);
+                }
+                break;
+            case "fullHouse":
+                if (this.isFullHouse(diceValues)) {
+                    score = 25;
+                }
+                break;
+            case "smallStraight":
+                if (this.isSmallStraight(diceValues)) {
+                    score = 30;
+                }
+                break;
+            case "largeStraight":
+                if (this.isLargeStraight(diceValues)) {
+                    score = 40;
+                }
+                break;
+            case "chance":
+                score = diceValues.reduce((sum, dice) => sum + dice, 0);
+                break;
+            case "yatzy":
+                if (this.hasNOfAKind(diceValues, 5)) {
+                    score = 50;
+                }
+                break;
+            default:
+                console.error("Invalid category: " + category);
         }
-        return -1; // Invalid or already scored category
+    
+        this.scoreTable[category] = score;
+        return score;
     }
-
+    
+     
     calculateCategoryScore(category, diceValues) {
         // Example scoring logic for the 'Ones' category (add more categories)
         if (category === 'Ones') {
@@ -90,65 +142,43 @@ class YatzyEngine {
     }
         return null; // Default: category not implemented
     }
-
     isValidSelection(category, diceValues) {
-        // Example validation for the 'Ones' category (add more categories)
-        if (category === 'Ones') {
-            // Check if there are at least one '1' in the dice values
-            return diceValues.includes(1);
-        }
-        // Implement validation for other categories
-        if (category === 'Twos') {
-            // Check if there are at least one '2' in the dice values
-            return diceValues.includes(2);
-        }
-        if (category === 'Threes') {
-            // Check if there are at least one '3' in the dice values
-            return diceValues.includes(3);
-        }
-        if (category === 'Fours') {
-            // Check if there are at least one '4' in the dice values
-            return diceValues.includes(4);
-        }
-        if (category === 'Fives') {
-            // Check if there are at least one '1' in the dice values
-            return diceValues.includes(5);
-        }
-        if (category === 'Sixes') {
-            // Check if there are at least one '1' in the dice values
-            return diceValues.includes(6);
-        }
-        if (category === 'ThreeOfAKind') {
-        return this.hasNOfAKind(diceValues, 3);
-        }
-        if (category === 'FourOfAKind') {
-            return this.hasNOfAKind(diceValues, 4);
-        }
-        if (category === 'FullHouse') {
-            return this.hasNOfAKind(diceValues);
-        }
-        if (category === 'SmallStraight') {
-            return this.isSmallStraight(diceValues);
-        } 
-        if (category === 'LargeStraight') {
-            return this.isLargeStraight(diceValues);
-        }
-        if (category === 'Yatzy') {
-            return this.hasNOfAKind(diceValues, 5);
-        }
-        if (category === 'Chance') {
-            return true;
-        }
-        if (category === 'Bonus') {
-            return false;
-        }
-        if (category === 'Total Score') {
-            return true; // The 'Total Score' category is always valid.
-        }
-        // For example, 'Twos', 'Threes', 'Four of a Kind', 'Full House', etc.
-        return false; // Default: category not implemented or invalid
+      switch (category) {
+        case "ones":
+        case "twos":
+        case "threes":
+        case "fours":
+        case "fives":
+        case "sixes":
+          return true;
+        case "threeOfAKind":
+          return this.isThreeOfAKind(diceValues);
+        case "fourOfAKind":
+          return this.isFourOfAKind(diceValues);
+        case "fullHouse":
+          return this.isFullHouse(diceValues);
+        case "smallStraight":
+          return this.isSmallStraight(diceValues);
+        case "largeStraight":
+          return this.isLargeStraight(diceValues);
+        case "chance":
+          return true;
+        case "yatzy":
+          return this.isYatzy(diceValues);
+      }
     }
-}
-
-// Export the YatzyEngine class/module
-export default YatzyEngine;
+  
+    isThreeOfAKind(diceValues) {
+      return this.getMatchingDiceCount(diceValues) >= 3;
+    }
+  
+    isFourOfAKind(diceValues) {
+      return this.getMatchingDiceCount(diceValues) >= 4;
+    }
+  
+    isFullHouse(diceValues) {
+      const counts = this.getDiceCounts(diceValues);
+      return Object.values(counts).includes(2) && Object.values(counts).includes(3);
+    }
+  
+}  
