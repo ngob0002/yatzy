@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="Yatzy.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" type="text/css" href="Yatzy.css"> 
     <title>Yatzy Game</title>
 </head>
 <body>
@@ -11,16 +11,16 @@
 
     <div id="dice-container">
         <div class="die" id="die1"></div>
-        <div class="die" id="die2"></div>
-        <div class="die" id="die3"></div>
-        <div class="die" id="die4"></div>
-        <div class="die" id="die5"></div>
+        <div class="die" id ="die2"></div>
+        <div class="die" id ="die3"></div>
+        <div class="die" id ="die4"></div>
+        <div class="die" id ="die5"></div>
     </div>
-
     <div id="total">Total: 0</div>
 
     <button id="roll-button">Roll the Dice</button>
     <button id="score-button">Score</button>
+    <div id="current-round">Round: 1</div>
 
     <div class="scorecard-container">
         <table class="scorecard">
@@ -101,6 +101,34 @@
         </table>
     </div>
 
-    <script src="yatzy.js"></script> <!-- Link to your JavaScript file -->
+    <!-- Category Selection Dropdown -->
+    <div class="category-selection">
+        <label for="category-selector">Select a Category:</label>
+        <select id="category-selector">
+            <option value="ones">Ones</option>
+            <option value="twos">Twos</option>
+            <option value="threes">Threes</option>
+            <option value="fours">Fours</option>
+            <option value="fives">Fives</option>
+            <option value="sixes">Sixes</option>
+            <option value="TOAKscore">Three of a Kind</option>
+            <option value="FOAKscore">Four of a Kind</option>
+            <option value="fullHouseScoreValue">Full House</option>
+            <option value="smallStraight">Small Straight</option>
+            <option value="largeStraight">Large Straight</option>
+            <option value="yahtzyScore">Yatzy</option>
+            <option value="ChanceScore">Chance</option>
+        </select>
+    </div>
+
+
+    <script src="Dice.js"></script>   
+    <script src="YatzyEngine.js"></script>
+    <script src="YatzyGame.js"></script>
+    <script  src="Yatzy.js"></script>
+
+
+   
+   
 </body>
 </html>
