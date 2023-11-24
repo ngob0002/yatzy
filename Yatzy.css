@@ -35,10 +35,13 @@ body {
     background-image: url('dice1.jpg');
 
     background-size: 600% 100%;
-
+    
 }
 
- 
+/* Add this class for the rolling animation */
+.rolling {
+  animation: roll 1s linear infinite; /* Adjust the animation duration as needed */
+}
 
 button#roll-button {
 
@@ -154,9 +157,6 @@ button#roll-button:focus {
 
 }
 
- 
-
-/* ... Previous CSS code ... */
 
  
 
